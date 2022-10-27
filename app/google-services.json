@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1067609306559",
+    "project_id": "chatting-d8c36",
+    "storage_bucket": "chatting-d8c36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067609306559:android:ac87937232f2ee3f1f9d0a",
+        "android_client_info": {
+          "package_name": "com.Hassan.chattingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067609306559-eqesumueqac8h60feo8o0pttspel3k37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Hassan.chattingapp",
+            "certificate_hash": "cff0069191cd089eae7ca6df2526529c2918a69c"
+          }
+        },
+        {
+          "client_id": "1067609306559-g6lpnbln6loa4l7otv8n7m926f90oo21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDJFymG7VVauSTBp11_WnIxt1J_Ywdvvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067609306559-g6lpnbln6loa4l7otv8n7m926f90oo21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
