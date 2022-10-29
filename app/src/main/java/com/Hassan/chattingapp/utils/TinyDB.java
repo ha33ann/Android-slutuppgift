@@ -48,13 +48,7 @@ public class TinyDB {
 
         return bitmapFromPath;
     }
-
-
-
-
-    public String getSavedImagePath() {
-        return lastImagePath;
-    }
+    
 
 
 
@@ -78,13 +72,6 @@ public class TinyDB {
         return mFullPath;
     }
 
-
-
-    //under här skapar jag en metod som heter putImageWithfullPath
-    //som kommer att användas för att spara en bild med full path
-    public boolean putImageWithFullPath(String fullPath, Bitmap theBitmap) {
-        return !(fullPath == null || theBitmap == null) && saveBitmap(fullPath, theBitmap);
-    }
 
 
     //här skapar jag en metod som heter setupfullpath
@@ -161,12 +148,6 @@ public class TinyDB {
 
 
 
-    //här skapar jag en metod som heter getint
-    public int getInt(String key) {
-        return preferences.getInt(key, 0);
-    }
-
-
     //här under skapar jag en arraylist som returnerar key
     public ArrayList<Integer> getListInt(String key) {
         String[] myList = TextUtils.split(preferences.getString(key, ""), "‚‗‚");
@@ -179,27 +160,6 @@ public class TinyDB {
         return newList;
     }
 
-
-    public long getLong(String key) {
-        return preferences.getLong(key, 0);
-    }
-
-
-    public float getFloat(String key) {
-        return preferences.getFloat(key, 0);
-    }
-
-
-    public double getDouble(String key) {
-        String number = getString(key);
-
-        try {
-            return Double.parseDouble(number);
-
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
 
 
     //här skapar jag en arraylist som returnerar key
@@ -238,10 +198,6 @@ public class TinyDB {
     }
 
 
-    public boolean getBoolean(String key) {
-        return preferences.getBoolean(key, false);
-    }
-
 
     //här skapar jag en arraylist som returnerar key
     public ArrayList<Boolean> getListBoolean(String key) {
@@ -260,60 +216,6 @@ public class TinyDB {
     }
 
 
-
-
-    //här skapar jag en metod som heter putint
-    public void putInt(String key, int value) {
-        checkForNullKey(key);
-        preferences.edit().putInt(key, value).apply();
-    }
-
-
-    //här skapar jag en metod som heter putlistint
-    public void putListInt(String key, ArrayList<Integer> intList) {
-        checkForNullKey(key);
-        Integer[] myIntList = intList.toArray(new Integer[intList.size()]);
-        preferences.edit().putString(key, TextUtils.join("‚‗‚", myIntList)).apply();
-    }
-
-
-    //här skapar jag en metod som heter putlong
-    public void putLong(String key, long value) {
-        checkForNullKey(key);
-        preferences.edit().putLong(key, value).apply();
-    }
-
-
-    //här skapar jag en metod som heter putlistlong
-    public void putListLong(String key, ArrayList<Long> longList) {
-        checkForNullKey(key);
-        Long[] myLongList = longList.toArray(new Long[longList.size()]);
-        preferences.edit().putString(key, TextUtils.join("‚‗‚", myLongList)).apply();
-    }
-
-
-    //här skapar jag en metod som heter putfloat
-    public void putFloat(String key, float value) {
-        checkForNullKey(key);
-        preferences.edit().putFloat(key, value).apply();
-    }
-
-
-    //här skapar jag en metod som heter putdouble
-    public void putDouble(String key, double value) {
-        checkForNullKey(key);
-        putString(key, String.valueOf(value));
-    }
-
-
-    //här skapar jag en metod som heter putlistdouble
-    public void putListDouble(String key, ArrayList<Double> doubleList) {
-        checkForNullKey(key);
-        Double[] myDoubleList = doubleList.toArray(new Double[doubleList.size()]);
-        preferences.edit().putString(key, TextUtils.join("‚‗‚", myDoubleList)).apply();
-    }
-
-
     //här skapar jag en metod som heter putstring
     public void putString(String key, String value) {
         checkForNullKey(key); checkForNullValue(value);
@@ -329,11 +231,6 @@ public class TinyDB {
     }
 
 
-    //här skapar jag en metod som heter putboolean
-    public void putBoolean(String key, boolean value) {
-        checkForNullKey(key);
-        preferences.edit().putBoolean(key, value).apply();
-    }
 
 
     //här skapar jag en metod som heter putlistboolean
@@ -355,26 +252,8 @@ public class TinyDB {
 
 
 
-//    }
 
 
-    //här skapar jag en metod som heter remove
-    public void remove(String key) {
-        preferences.edit().remove(key).apply();
-    }
-
-
-    //här skapar jag en metod som heter deleteImage
-    public boolean deleteImage(String path) {
-        return new File(path).delete();
-    }
-
-
-
-    //här skapar jag en metod som heter clear
-    public void clear() {
-        preferences.edit().clear().apply();
-    }
 
 
     //här skapar jag en metod som heter nap som returnerar preferences
@@ -382,22 +261,6 @@ public class TinyDB {
         return preferences.getAll();
     }
 
-
-
-    //här skapar jag en metod som heter registerOnSharedPreferenceChangeListener
-    public void registerOnSharedPreferenceChangeListener(
-            SharedPreferences.OnSharedPreferenceChangeListener listener) {
-
-        preferences.registerOnSharedPreferenceChangeListener(listener);
-    }
-
-
-    //här skapar jag en metod som heter unregisterOnSharedPreferenceChangeListener
-    public void unregisterOnSharedPreferenceChangeListener(
-            SharedPreferences.OnSharedPreferenceChangeListener listener) {
-
-        preferences.unregisterOnSharedPreferenceChangeListener(listener);
-    }
 
 
 
@@ -416,16 +279,6 @@ public class TinyDB {
     }
 
 
-    //här skapar jag en metod som heter objectExists
-    public boolean objectExists(String key){
-        String gottenString = getString(key);
-        if(gottenString.isEmpty()){
-            return false;
-        }else {
-            return true;
-        }
-
-    }
 
 
     //här skapar jag en metod som heter checkForNullKey
