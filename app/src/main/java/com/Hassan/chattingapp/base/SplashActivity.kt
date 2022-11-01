@@ -19,10 +19,10 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //sätter layouten till activity_splash
         super.onCreate(savedInstanceState)
-        binding=ActivitySplashBinding.inflate(layoutInflater)
-        val view:View=binding.root
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        val view: View = binding.root
         setContentView(view)
-        tinyDB= TinyDB(this)
+        tinyDB = TinyDB(this)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN

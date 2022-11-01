@@ -20,7 +20,8 @@ class ChatAdapter(
     private val context: Context,
     private var mList: ArrayList<ChatModel>,
     private var tinyDB: TinyDB,
-    val btnlistener: SpeakListener) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
+    val btnlistener: SpeakListener
+) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {
     companion object {
         var mClickListener: SpeakListener? = null
     }
@@ -84,9 +85,9 @@ class ChatAdapter(
         var sendMic: ImageView = itemView.findViewById(R.id.sendMic)
 
 
-
     }
 
 }
+
 
 

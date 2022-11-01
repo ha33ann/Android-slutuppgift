@@ -1,6 +1,7 @@
 package com.Hassan.chattingapp
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
@@ -21,7 +22,10 @@ import com.Hassan.chattingapp.utils.TinyDB
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
-import org.intellij.lang.annotations.Language
+import nl.dionsegijn.konfetti.KonfettiView
+import nl.dionsegijn.konfetti.models.Shape.Circle
+import nl.dionsegijn.konfetti.models.Shape.Square
+import nl.dionsegijn.konfetti.models.Size
 import java.util.*
 
 
@@ -37,12 +41,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     lateinit var array: ArrayList<ChatModel>
     private val REQUEST_CODE_SPEECH_INPUT = 1
     private var tts: TextToSpeech? = null
-
-
-
-
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +68,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
 
-
         //om användaren trycker på sendImg,
         //skicka meddelandet till databasen och rensa edittexten
         databaseReference.addValueEventListener(object : ValueEventListener {
@@ -89,6 +86,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 val adapter = ChatAdapter(this@MainActivity, array, tintDb, object : SpeakListener {
                     override fun click(message: String) {
                         speakOut(message)
+
+
                     }
                 })
                 //sätter layoutmanager till recyclerviewn
@@ -97,6 +96,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
                 binding.recyclerView.layoutManager = mLayoutManager
                 binding.recyclerView.adapter = adapter
+
             }
 
             //om det inte går att hämta meddelanden från databasen,
@@ -115,8 +115,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         //och rensa edittexten
         binding.sendImg.setOnClickListener {
             if (!binding.msgEdt.text.trim().toString().equals("")) {
-                var chatmodel: ChatModel = ChatModel(tintDb.getString(ConstantKeys.USER_ID),
-                    binding.msgEdt.text.trim().toString())
+                var chatmodel: ChatModel = ChatModel(
+                    tintDb.getString(ConstantKeys.USER_ID),
+                    binding.msgEdt.text.trim().toString()
+                )
                 databaseReference.child(databaseReference.push().key.toString()).setValue(chatmodel)
                     .addOnCompleteListener {
                         binding.msgEdt.text = null
@@ -127,18 +129,29 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
 
-
         }
-
-
-
 
 
         //om användaren trycker på buttonrestart,
         //skapa en onClickListener och rensa databasen där chatten finns
+        //och aktivera en konfetti animation som visas på skärmen
         binding.buttonrestart.setOnClickListener {
-            databaseReference.removeValue()
+            databaseReference.removeValue();
+            binding.viewKonfetti.bringToFront()
+            binding.viewKonfetti.build()
+                .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                .setDirection(0.0, 359.0)
+                .setSpeed(1f, 5f)
+                .setFadeOutEnabled(true)
+                .setTimeToLive(2000L)
+                .addShapes(Circle, Square)
+                .addSizes(Size(12))
+                .setPosition(-50f, binding.viewKonfetti.width + 50f, -50f, -50f)
+                .streamFor(300, 5000L)
+
         }
+
+
         //om användaren trycker på buttonlogout,
         //skapa en onClickListener och logga ut användaren
         //och ta användaren tillbaka till start-sidan

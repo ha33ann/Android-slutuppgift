@@ -18,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     lateinit var tinyDB: TinyDB
     private lateinit var auth: FirebaseAuth
+
     //här skapar vi en instans av firebase autentisering
     //och databasen för att kunna använda oss av dem
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view: View = binding.root
         setContentView(view)
-        tinyDB= TinyDB(this)
+        tinyDB = TinyDB(this)
         auth = Firebase.auth
         clicks()
     }
@@ -46,14 +47,14 @@ class LoginActivity : AppCompatActivity() {
             val password: String = binding.passwordEdt.text.toString()
             //om användaren inte har skrivit in något i något av fälten
             //så kommer ett felmeddelande att visas
-            if (email == ""){
-                binding.emailEdt.error="Please Enter Email"
+            if (email == "") {
+                binding.emailEdt.error = "Please Enter Email"
                 binding.emailEdt.requestFocus()
                 return@setOnClickListener
             }
             //samma sak gäller för lösenordet
-            if (password == ""){
-                binding.passwordEdt.error="Please Enter Password"
+            if (password == "") {
+                binding.passwordEdt.error = "Please Enter Password"
                 binding.passwordEdt.requestFocus()
                 return@setOnClickListener
             }
@@ -72,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
 
-                    tinyDB.putString(ConstantKeys.USER_ID,user!!.uid)
+                    tinyDB.putString(ConstantKeys.USER_ID, user!!.uid)
                     binding.progressBar.visibility = View.GONE
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -81,8 +82,10 @@ class LoginActivity : AppCompatActivity() {
                     //om inloggningen misslyckas så visas ett felmeddelande
                 } else {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(baseContext, "Login failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Login failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
 //
 
                 }
